@@ -2,7 +2,7 @@ import { useState } from "react";
 import { categories } from "../Categories/CategoriesData";
 import { DateRange } from "react-date-range";
 
-const AddRoomForm = ({dates, handleDates, handleSubmit}) => {
+const AddRoomForm = ({dates, handleDates, handleSubmit, imagePreview, handleImagePreview}) => {
 
   return (
     <div className="w-full min-h-[calc(100vh-40px)] flex flex-col justify-center items-center text-gray-800 rounded-xl bg-gray-50">
@@ -69,11 +69,12 @@ const AddRoomForm = ({dates, handleDates, handleSubmit}) => {
               />
             </div>
 
-            <div className=" p-4 bg-white w-full  m-auto rounded-lg">
-              <div className="file_upload px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
-                <div className="flex flex-col w-max mx-auto text-center">
+            <div className=" p-4 bg-white flex w-full  m-auto rounded-lg">
+              <div className="px-5 py-3 relative border-4 border-dotted border-gray-300 rounded-lg">
+                <div className="flex flex-col flex-1 w-max mx-auto text-center">
                   <label>
                     <input
+                    onChange={handleImagePreview}
                       className="text-sm cursor-pointer w-36 hidden"
                       type="file"
                       name="image"
@@ -86,6 +87,9 @@ const AddRoomForm = ({dates, handleDates, handleSubmit}) => {
                     </div>
                   </label>
                 </div>
+              </div>
+              <div>
+              { imagePreview && <img className="h-14 w-20" src={imagePreview}/>}
               </div>
             </div>
             <div className="flex justify-between gap-2">
