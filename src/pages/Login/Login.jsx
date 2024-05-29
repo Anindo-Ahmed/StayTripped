@@ -102,7 +102,7 @@ const Login = () => {
               type='submit'
               className='bg-rose-500 w-full rounded-md py-3 text-white'
             >
-              { loading ? <TbFidgetSpinner className='animate-spin mx-auto'/> : 'Continue'}
+              { loading ? <TbFidgetSpinner className='animate-spin mx-auto'/> : 'Sign In'}
             </button>
           </div>
         </form>
