@@ -17,7 +17,6 @@ const RoomDetails = () => {
     queryKey: ['room', id],
     queryFn: async () => {
       const { data } = await axiosCommon.get(`/room/${id}`)
-      console.log(data)
       return data;
     },
   })

@@ -5,7 +5,7 @@ import LoadingSpinner from '../Shared/LoadingSpinner'
 import { useQuery } from '@tanstack/react-query'
 import useAxiosCommon from '../../hooks/useAxiosCommon'
 import { useSearchParams } from 'react-router-dom'
-import axios from 'axios'
+
 
 const Rooms = () => {
   const axiosCommon = useAxiosCommon();

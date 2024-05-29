@@ -7,46 +7,48 @@ import RoomDataRow from "../../../components/TableRow/RoomDataRow";
 import { toast } from "react-hot-toast";
 
 const MyListings = () => {
-    const { user } = useAuth();
-    const axiosSecure = useAxiosSecure();
+  const { user } = useAuth();
+  const axiosSecure = useAxiosSecure();
 
-    // Fetch room data for specific host
-    const { data: rooms = [], isLoading, refetch } = useQuery({
+  // Fetch room data for specific host
+  const {
+    data: rooms = [],
+    isLoading,
+    refetch,
+  } = useQuery({
     queryKey: ["my-listings", user?.email],
     queryFn: async () => {
       const { data } = await axiosSecure.get(`/my-listings/${user?.email}`);
       return data;
     },
   });
-//   console.log(rooms);
+  //   console.log(rooms);
 
-    // Delete data
-    const { mutateAsync} = useMutation({
-        mutationFn: async(id) => {
-            const { data } = await axiosSecure.delete(`/room/${id}`)
-            console.log(data);
-            return data;
-        },
-        onSuccess: (data)=>{
-            console.log(data);
-            toast.success('Successfully deleted')
-            refetch()
-        }
-        
-    })
+  // Delete data
+  const { mutateAsync } = useMutation({
+    mutationFn: async (id) => {
+      const { data } = await axiosSecure.delete(`/room/${id}`);
+      console.log(data);
+      return data;
+    },
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success("Successfully deleted");
+      refetch();
+    },
+  });
 
-    //  Handle delete
-    const handleDelete = async id => {
-        
-        try {
-            await mutateAsync(id)
-        } catch(error) {
-            console.log(error.message);
-            toast.error(error.message)
-        }    
+  //  Handle delete
+  const handleDelete = async (id) => {
+    try {
+      await mutateAsync(id);
+    } catch (error) {
+      console.log(error.message);
+      toast.error(error.message);
     }
+  };
 
-  if (isLoading) return <LoadingSpinner />
+  if (isLoading) return <LoadingSpinner />;
 
   return (
     <>
@@ -106,14 +108,13 @@ const MyListings = () => {
                   </tr>
                 </thead>
                 <tbody>
-                    {
-                        rooms.map(room => <RoomDataRow
-                            key={room._id}
-                            room={room}
-                            refetch={refetch}
-                            handleDelete={handleDelete}>
-                            </RoomDataRow>)
-                    }
+                  {rooms.map((room) => (
+                    <RoomDataRow
+                      key={room._id}
+                      room={room}
+                      handleDelete={handleDelete}
+                    ></RoomDataRow>
+                  ))}
                 </tbody>
               </table>
             </div>
